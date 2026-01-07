@@ -55,7 +55,8 @@
       },
       "scripts": {
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d build"
+      "deploy": "gh-pages -d build",
+      "build": "vite build"
     },
       "homepage": "https://HoangPH10.github.io/portfolio"
 }
