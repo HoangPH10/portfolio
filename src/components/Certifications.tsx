@@ -49,7 +49,16 @@ export function Certifications() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+          <h2 
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent"
+            style={{ 
+              backgroundImage: 'linear-gradient(to right, rgb(34, 211, 238), rgb(96, 165, 250), rgb(168, 85, 247))',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent'
+            }}
+          >
             Certifications & Awards
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">

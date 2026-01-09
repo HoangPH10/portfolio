@@ -29,7 +29,16 @@ export function Education() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 bg-clip-text text-transparent"
+            style={{ 
+              backgroundImage: 'linear-gradient(to right, rgb(244, 114, 182), rgb(251, 113, 133), rgb(251, 146, 60))',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent'
+            }}
+          >
             Education
           </h2>
           <p className="text-gray-400 text-lg">
