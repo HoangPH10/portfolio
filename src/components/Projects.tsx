@@ -45,7 +45,7 @@ export function Projects() {
       icon: Bot,
       tech: ["Azure AI Search", "Azure OpenAI","FastMCP", "Gemini", "Streamlit"],
       gradient: "from-blue-400 to-purple-500",
-      demo: "https://drive.google.com/file/d/1NuNBUe9TLHiv0r2vAkU0NWsw14qBnTeV/view?usp=drive_linkhttps://drive.google.com/file/d/1NuNBUe9TLHiv0r2vAkU0NWsw14qBnTeV/view?usp=sharing",
+      demo: "https://drive.google.com/file/d/1NuNBUe9TLHiv0r2vAkU0NWsw14qBnTeV/view?usp=sharing",
       github: "https://github.com/HoangPH10/ai-chatbot-project"
     }
   ];
