@@ -1,20 +1,36 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { ExternalLink, Github, Bot, Briefcase, Linkedin   } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ExternalLink, Video, Github, Bot, Briefcase, Linkedin, FileUser, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 
 export function Projects() {
+  const [modalDemo, setModalDemo] = useState<{ title: string; url: string } | null>(null);
+
+  const toEmbedUrl = (url: string) => {
+    const match = url.match(/\/file\/d\/([^/]+)/);
+    return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url;
+  };
+
   const projects = [
     {
       title: "Brose Multi-Agent Services",
-      description: "The Requirements Engineer Agent is equipped with tools to extract requirements from PDF specifications, classify them, and import them into Codebeamer ALM. The KBE Agent is capable of extracting parameters such as weight, angle, and height of power tailgates from requirements, as well as interpreting simulation results from KBE tools. Both agents are deployed as independent MCP servers and expose their tools to the Deep Agent Framework. This project is presented at Microsoft AI Tour Frankfurt on Nov 06, 2025",
+      description: "The Requirements Engineer Agent is equipped with tools to extract requirements from PDF specifications, classify them, and import them into Codebeamer ALM. The KBE Agent is capable of extracting parameters such as weight, angle, and height of power tailgates from requirements, as well as interpreting simulation results from KBE tools. Both agents are deployed as independent MCP servers and expose their tools to the Deep Agent Framework. This project is presented at Microsoft AI Tour Frankfurt on Nov 06, 2025.",
       icon: Bot,
-      tech: ["LangChain", "LangGraph", "OpenAI", "Azure Cloud Services"],
+      tech: ["LangChain", "LangGraph", "OpenAI", "Azure Cloud Services", "Agent Skills", "Model Context Protocol"],
       gradient: "from-orange-400 to-red-500",
       linkedin: "https://www.linkedin.com/posts/jens-krueger-780a131_nttdata-brose-microsoft-activity-7392509382149701632-Ajqd/",
     },
-      {
+    {
+      title: "Interview Stimulator Application",
+      description: "This project is an AI-powered interview platform designed to evaluate candidate–job fit and conduct interactive interview sessions. It uses graph-based workflows to compare CV content with job description, generate relevant interview questions, and simulate real-time Q&A conversations with candidates. The system integrates workflows with FastAPI via A2A protocol, provides streaming APIs for frontend interaction, and is deployed on AWS ECS for scalable cloud execution. This project demonstrates practical experience in multi-agent workflow design, backend API development, and AI deployment.",
+      icon: FileUser ,
+      tech: ["FastAPI", "A2A Protocol", "Amazon Web Services", "LangGraph"],
+      gradient: "from-cyan-300 to-blue-400",
+      demo: "https://drive.google.com/file/d/1d7BwO46k3wU445JWH0EXkb7W7LBhLjg2/view?usp=sharing",
+      // github: "https://github.com/HoangPH10/portfolio-generation-project"
+    },
+    {
       title: "Portfolio Generation Project",
       description: "This project is an automated CV-to-portfolio generation system that transforms a PDF resume into a fully responsive personal portfolio website. It uses Azure Document Intelligence to extract text from CV PDFs, Azure OpenAI to intelligently structure and interpret resume content, and LangChain to orchestrate the end-to-end AI workflow. The system generates clean, production-ready HTML, CSS, and JavaScript files, and supports both CLI and Streamlit-based web usage, demonstrating practical application of LLM-powered document understanding, code generation, and AI-driven automation.",
       icon: Briefcase,
@@ -35,6 +51,7 @@ export function Projects() {
   ];
 
   return (
+    <>
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -81,29 +98,9 @@ export function Projects() {
                           size="sm"
                           variant="ghost"
                           className="text-gray-400 hover:text-blue-400"
-                          onClick={() => {
-                            const videoPopup = window.open('', '_blank', 'width=800,height=600,scrollbars=no,resizable=no');
-                            if (videoPopup) {
-                              videoPopup.document.write(`
-                                <!DOCTYPE html>
-                                <html lang="en">
-                                <head>
-                                  <title>Video Demo</title>
-                                  <style>
-                                    body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #000; }
-                                    iframe { width: 100%; height: 100%; border: none; }
-                                  </style>
-                                </head>
-                                <body>
-                                  <iframe src="${project.demo}" allowfullscreen></iframe>
-                                </body>
-                                </html>
-                              `);
-                              videoPopup.document.close();
-                            }
-                          }}
+                          onClick={() => setModalDemo({ title: project.title, url: project.demo! })}
                         >
-                          <ExternalLink size={16} />
+                          <Video size={16} />
                         </Button>
                       )}
                       {project.github && (
@@ -154,5 +151,71 @@ export function Projects() {
         </div>
       </div>
     </section>
+
+    {/* Video Demo Modal */}
+    <AnimatePresence mode="wait">
+      {modalDemo && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4"
+          onClick={() => setModalDemo(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="relative w-full max-w-5xl bg-[#0f0f0f] rounded-xl overflow-hidden shadow-2xl border border-gray-800"
+            onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          >
+            {/* YouTube-style header bar */}
+            <div className="flex items-center justify-between px-4 py-3 bg-[#212121] border-b border-gray-700/60">
+              <div className="flex items-center gap-3 min-w-0">
+                {/* Red play icon like YouTube */}
+                <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none">
+                  <rect width="24" height="24" rx="5" fill="#FF0000" />
+                  <polygon points="9.5,7 17,12 9.5,17" fill="white" />
+                </svg>
+                <span className="text-white font-semibold text-sm sm:text-base truncate">{modalDemo.title}</span>
+              </div>
+              <button
+                className="ml-4 p-1.5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors shrink-0"
+                onClick={() => setModalDemo(null)}
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Video — 16:9, full width */}
+            <div className="w-full bg-black" style={{ aspectRatio: "16/9" }}>
+              <iframe
+                src={toEmbedUrl(modalDemo.url)}
+                className="w-full h-full"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            </div>
+
+            {/* YouTube-style bottom bar */}
+            <div className="px-4 py-3 bg-[#212121] flex items-center justify-between gap-2">
+              <p className="text-gray-400 text-xs sm:text-sm truncate">Demo video — {modalDemo.title}</p>
+              <a
+                href={modalDemo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors shrink-0"
+              >
+                <ExternalLink size={13} />
+                <span className="hidden sm:inline">Open in Drive</span>
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
