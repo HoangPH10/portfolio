@@ -69,7 +69,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -159,7 +159,7 @@ export function Projects() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-6 sm:p-12"
           onClick={() => setModalDemo(null)}
         >
           <motion.div
@@ -167,7 +167,7 @@ export function Projects() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="relative w-full max-w-5xl bg-[#0f0f0f] rounded-xl overflow-hidden shadow-2xl border border-gray-800"
+            className="relative w-full max-w-4xl bg-[#0f0f0f] rounded-xl overflow-hidden shadow-2xl border border-gray-800"
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             {/* YouTube-style header bar */}
