@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ExternalLink, Video, Github, Bot, Briefcase, Linkedin, FileUser, X } from 'lucide-react';
+import { ExternalLink, Video, Github, Bot, Briefcase, Linkedin, FileUser, BookOpen, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 
@@ -20,6 +20,7 @@ export function Projects() {
       tech: ["LangChain", "LangGraph", "OpenAI", "Azure Cloud Services", "Agent Skills", "Model Context Protocol"],
       gradient: "from-orange-400 to-red-500",
       linkedin: "https://www.linkedin.com/posts/jens-krueger-780a131_nttdata-brose-microsoft-activity-7392509382149701632-Ajqd/",
+      referenceLink: "https://de.nttdata.com/insights/blog/agentic-product-development"
     },
     {
       title: "Interview Stimulator Application",
@@ -95,32 +96,42 @@ export function Projects() {
                     <div className="flex space-x-2">
                       {project.demo && (
                         <Button
-                          size="sm"
+                          size="icon"
                           variant="ghost"
                           className="text-gray-400 hover:text-blue-400"
                           onClick={() => setModalDemo({ title: project.title, url: project.demo! })}
                         >
-                          <Video size={16} />
+                          <Video className="size-5" />
                         </Button>
                       )}
                       {project.github && (
                         <Button
-                          size="sm"
+                          size="icon"
                           variant="ghost"
                           className="text-gray-400 hover:text-blue-400"
                           onClick={() => window.open(project.github, '_blank', 'noopener noreferrer')}
                         >
-                          <Github size={16} />
+                          <Github className="size-5" />
                         </Button>
                       )}
                       {project.linkedin && (
                         <Button
-                          size="sm"
+                          size="icon"
                           variant="ghost"
                           className="text-gray-400 hover:text-blue-400"
                           onClick={() => window.open(project.linkedin, '_blank', 'noopener noreferrer')}
                         >
-                          <Linkedin size={16} />
+                          <Linkedin className="size-5" />
+                        </Button>
+                      )}
+                      {project.referenceLink && (
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="text-gray-400 hover:text-blue-400"
+                          onClick={() => window.open(project.referenceLink, '_blank', 'noopener noreferrer')}
+                        >
+                          <BookOpen className="size-5" />
                         </Button>
                       )}
                     </div>
